@@ -18,6 +18,7 @@ static void matrixtask(void);
 static void communication_task(void);
 static void prioritysettask(void);
 
+
 int main(void)
 {
 
@@ -28,8 +29,6 @@ int main(void)
 
 	/* Initialise the trace recorder.  Use of the trace recorder is optional.
 	See http://www.FreeRTOS.org/trace for more information. */
-
-
 	xTaskCreate((pdTASK_CODE)matrixtask, (signed char *)"Matrix", 1000, NULL, 3, &matrix_handle);
 	xTaskCreate((pdTASK_CODE)communication_task, (signed char *)"Communication", configMINIMAL_STACK_SIZE, NULL, 1, &communication_handle);
 	xTaskCreate((pdTASK_CODE)prioritysettask, (signed char *)"Priorityset", configMINIMAL_STACK_SIZE, NULL, 2 , &priorityset_handle);
@@ -37,6 +36,7 @@ int main(void)
     vTaskStartScheduler();
     for(;;);
     return 0;
+
 }
 
 
@@ -90,9 +90,6 @@ static void matrixtask(void)
 		fflush(stdout);
 		CountMatrix= 0;
 	}
-    
-    
-    
 }
 
 static void communication_task()
@@ -114,6 +111,7 @@ static void communication_task()
 		active = FALSE ;
 	}
 }
+
 static void prioritysettask()
 {
 
@@ -135,9 +133,6 @@ static void prioritysettask()
 	}
 }
 
-
-
-
 void vApplicationTickHook( void )
 {
 	/* This function will be called by each tick interrupt if
@@ -145,7 +140,6 @@ void vApplicationTickHook( void )
 	added here, but the tick hook is called from an interrupt context, so
 	code must not attempt to block, and only the interrupt safe FreeRTOS API
 	functions can be used (those that end in FromISR()). */
-
 	CountMatrix++;
 	Count++;
 	// #if ( mainCREATE_SIMPLE_BLINKY_DEMO_ONLY != 1 )
